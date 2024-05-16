@@ -27,7 +27,7 @@ pipeline {
                     echo "${packageJSONVersion}"  
                     sh "zip webapp/lms-${packageJSONVersion}.zip -r webapp/dist"
                     sh "curl -v -u admin:lms12345 --upload-file webapp/lms-${packageJSONVersion}.zip http://54.212.22.255:8081/repository/lms/"     
-            }
+                }
             }
         }
 
