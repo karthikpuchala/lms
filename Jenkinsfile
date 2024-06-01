@@ -4,7 +4,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('pyvk03')
     }
     stages {
-        stage('get version') {
+        stage('get package version') {
             steps {
                 script {
                     def packageJson = readJSON file: 'api/package.json'
