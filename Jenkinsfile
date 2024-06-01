@@ -27,7 +27,7 @@ pipeline {
         }
     }
 
-    stage('push image') {
+    stage('push the image') {
         steps {
             sh "docker push karthikpuchala/lms:${env.PACKAGE_VERSION}"
         }
