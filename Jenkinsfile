@@ -16,7 +16,7 @@ pipeline {
         }
     }
 
-        stage(build image) {
+        stage('build image') {
             steps {
                 sh "cd api && docker build -t karthikpuchala/lms:${env.PACKAGE_VERSION} ."
             }
