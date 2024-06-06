@@ -40,4 +40,4 @@ pipeline {
             }
         }
 }
-// logout
+// logout page
