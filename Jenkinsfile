@@ -1,4 +1,4 @@
-/* groovylint-disable CompileStatic */
+/* groovylint-disable CompileStatic, NoDef */
 pipeline {
     agent any
     environment {
@@ -8,6 +8,7 @@ pipeline {
         stage('get package version') {
             steps {
                 script {
+                    /* groovylint-disable-next-line NoDef, VariableTypeRequired */
                     def packageJson = readJSON file: 'api/package.json'
                     def version = packageJson.version
                     env.PACKAGE_VERSION = version
@@ -32,11 +33,11 @@ pipeline {
             steps {
                 sh "docker push karthikpuchala/lms:${env.PACKAGE_VERSION}"
             }
-        post {
-            always {
-                sh 'docker logout'
+            post {
+                always {
+                    sh 'docker logout'
+                }
             }
-        }
         }
 }
 // logout
