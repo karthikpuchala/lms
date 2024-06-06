@@ -22,13 +22,13 @@ pipeline {
             }
         }
 
-        stage('login to dockerhub') {
+        stage('login dockerhub') {
             steps {
                 sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin"
             }
         }
 
-        stage('push the image to dockerhub') {
+        stage('push dockerhub') {
             steps {
                 sh "docker push karthikpuchala/lms:${env.PACKAGE_VERSION}"
             }
