@@ -2,7 +2,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('lms')
+        DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
     }
     stages {
         stage('get package version') {
@@ -17,26 +17,32 @@ pipeline {
         }
         stage('build image') {
             steps {
-                sh "cd api && docker build -t karthikpuchala/lms:${env.PACKAGE_VERSION} ."
+                script {
+                    sh "cd api && docker build -t karthikpuchala/lms:${env.PACKAGE_VERSION} ."
+                }
             }
         }
 
         stage('login dockerhub') {
             steps {
-                sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin"
+                script {
+                    sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin"
+                }
             }
         }
 
         stage('push dockerhub') {
             steps {
-                sh "docker push karthikpuchala/lms:${env.PACKAGE_VERSION}"
-            }
-            post {
-                always {
-                    sh 'docker logout'
+                script {
+                    sh "docker push karthikpuchala/lms:${env.PACKAGE_VERSION}"
                 }
             }
         }
     }
+        post {
+            always {
+                echo 'docker logout'
+            }
+        }
 }
 // logout page 112
