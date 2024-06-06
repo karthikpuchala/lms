@@ -18,7 +18,7 @@ pipeline {
         stage('build image') {
             steps {
                 script {
-                    sh "cd api && docker build -t karthikpuchala/lms:${env.PACKAGE_VERSION} ."
+                    sh "cd api && sudo docker build -t karthikpuchala/lms:${env.PACKAGE_VERSION} ."
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
         stage('push dockerhub') {
             steps {
                 script {
-                    sh "docker push karthikpuchala/lms:${env.PACKAGE_VERSION}"
+                    sh "sudo docker push karthikpuchala/lms:${env.PACKAGE_VERSION}"
                 }
             }
         }
