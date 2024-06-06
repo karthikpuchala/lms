@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('pyvk03')
+        DOCKERHUB_CREDENTIALS = credentials('lms')
     }
     stages {
         stage('get version') {
