@@ -1,3 +1,4 @@
+/* groovylint-disable CompileStatic */
 pipeline {
     agent any
     environment {
@@ -10,12 +11,12 @@ pipeline {
                     def packageJson = readJSON file: 'api/package.json'
                     def version = packageJson.version
                     env.PACKAGE_VERSION = version
-                } 
+                }
             }
         }
     }
 
-        stage {
+        stage(build image) {
             steps {
                 sh "cd api && docker build -t karthikpuchala/lms:${env.PACKAGE_VERSION} ."
             }
@@ -23,7 +24,7 @@ pipeline {
 
         stage('login to dockerhub') {
             steps {
-            sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin"
+                sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin"
             }
         }
 
@@ -36,6 +37,6 @@ pipeline {
                 sh 'docker logout'
             }
         }
-    }
+        }
 }
 // logout
