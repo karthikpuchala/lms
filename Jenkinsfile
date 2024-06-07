@@ -22,6 +22,20 @@ pipeline {
                 }
             }
         }
+        stage('login into dockerhub') {
+            steps {
+                script {
+                    sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR--Password-stdin"
+                }
+            }
+        }
+        stage('push the image') {
+            steps {
+                script {
+                    sh "docker push karthikpuchala/lms:${env.PACKAGE_VERSION}"
+                }
+            }
+        }
     }
 }
 // logout page 112
