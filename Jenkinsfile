@@ -15,13 +15,6 @@ pipeline {
                 }
             }
         }
-        stage('github') {
-            steps {
-                script {
-                    sh "https://github.com/karthikpuchala/lms.git"
-                }
-            }
-        }
         stage('build image') {
             steps {
                 script {
