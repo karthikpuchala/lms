@@ -22,6 +22,14 @@ pipeline {
                 }
             }
         }
+        stage('login into dockerhub') {
+            steps {
+                script {
+                    // login into dockerhub
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR--password-stdin'
+                }
+            }
+        }
     }
 }
 // logout page 112
