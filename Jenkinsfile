@@ -2,7 +2,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
+        DOCKERHUB_CREDENTIALS = credentials('jenkin')
     }
     stages {
         stage('get package version') {
