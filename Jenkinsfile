@@ -15,18 +15,17 @@ pipeline {
                 }
             }
         }
+        stage('github') {
+            steps {
+                script {
+                    sh 'https://github.com/karthikpuchala/lms.git'
+                }
+            }
+        }
         stage('build image') {
             steps {
                 script {
                     sh "cd api && sudo docker build -t karthikpuchala/lms:${env.PACKAGE_VERSION} ."
-                }
-            }
-        }
-        stage('login into dockerhub') {
-            steps {
-                script {
-                    // login into dockerhub
-                    sh 'echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR--password-stdin'
                 }
             }
         }
