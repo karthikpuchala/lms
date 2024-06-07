@@ -18,7 +18,7 @@ pipeline {
         stage('github') {
             steps {
                 script {
-                    sh 'https://github.com/karthikpuchala/lms.git'
+                    sh "https://github.com/karthikpuchala/lms.git"
                 }
             }
         }
